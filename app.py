@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import cv2
 import os
 import pandas as pd
@@ -56,8 +55,14 @@ def upload_page():
 #파일 업로드 처리
 @app.route('/fileUpload', methods = ['GET', 'POST'])
 def upload_file():
+	uploads_dir = os.path.join(os.getcwd(), 'static')
+	if not os.path.exists(uploads_dir):
+		os.makedirs(uploads_dir)
+	model = torch.load("best_model.pth")
+
+
 	if request.method == 'POST':
-		f = request.files['file']
+		f = request.files['image']
 		filename = secure_filename(f.filename)
 		file_path = os.path.join('uploads', filename)
 		if not os.path.exists('uploads'):
@@ -65,44 +70,14 @@ def upload_file():
 		f.save(file_path)
 		img = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
 		img = cv2.resize(img,(224, 224))
-		label = predict_image(f.file)
-		return render_template('view.html', label = label)
-	
+		label = predict_image(f)
+		data = (np.asarray(img) / 255.0).reshape(1, 784)  # Reshape for model input (flattened)
+
+		pred = model.predict(f)
+		print(pred[0])
+		pred = np.argmax(pred, axis=1)
+	return render_template('view.html', out=str(pred[0]), im=f.filename)
+
 if __name__ == '__main__':
     # 서버 실행
 	app.run(host='0.0.0.0',debug= True)
-=======
-
-import cv2
-import numpy as np
-from flask import Flask, render_template, request
-from PIL import Image
-from werkzeug.utils import secure_filename
-path = 'c:/data/temp/'
-# 입력 이미지
-app = Flask(__name__)
-imgSize = (300, 300)
-@app.route('/')
-def upload_page():
-	return render_template('index1.html')
-
-#파일 업로드 처리
-@app.route('/fileUpload', methods = ['GET', 'POST'])
-def upload_file():
-	if request.method == 'POST':
-		f = request.files['file']
-		#저장할 경로 + 파일명
-		file_path = './' + secure_filename(f.filename)
-		f.save(file_path)
-		img = Image.open(file_path)
-        
-        # 입력 이미지
-	return '완료'
-
-
-if __name__ == '__main__':
-    # 서버 실행
-    app.run(debug = True)
-
-
->>>>>>> 35121715e30cee38204ba0f4a315bf3dc915d77f
