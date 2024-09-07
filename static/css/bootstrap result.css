@@ -34,10 +34,10 @@ table {
   border-collapse: collapse;
   border: 1px solid white;
   position: relative;
-  left: 100%;
+  left: 30%;
+  top: 50%;
   transform: translateX(-50%);
   max-width: 50%; /* 이미지가 화면을 넘지 않도록 설정 */
-  height: 200px;
   font-size: 24px;
   color:#000
 }
