@@ -1,23 +1,25 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     
     <title>의정부시 대형 폐기물 처리 비용</title>
     <style>
-        img.relative{
+        img.relative {
             position: relative;
-            left: 300px;
-            top: 50px;
-
+            left: 0%;
+            transform: translateX(-50%);
+            top: 25px;
+            max-width: 50%; /* 이미지가 화면을 넘지 않도록 설정 */
+            height: auto;
         }
     </style>
     <link href="../static/css/bootstrap result.css" rel="stylesheet" />
-	<link href="../static/css/coming-sssoon.css" rel="stylesheet" />    
+    <link href="../static/css/coming-sssoon.css" rel="stylesheet" />    
     
     <!--     Fonts     -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
@@ -72,32 +74,44 @@
 <!--   You can change the black color for the filter with those colors: blue, green, red, orange       -->
 
     <div class="container">
+        
         <h1 class="logo cursive">
-            결과 값
-        </h1>
+            
 <!--  H1 can have 2 designs: "logo" and "logo cursive"           -->
-        <img class="relative">
+
+        <img src="{{ url_for('static', filename='uploads/' + image_filename) }}" alt="Uploaded Image" class="relative">
+        <div class="container">
+            {% for table in tables %} 
+            <h2>
+                {{titles[loop.index]}}
+            </h2>                             
+            {{ table|safe }} 
+            {% endfor %}
+        
         <div class="content">
-            <h4 class="motto">이미지 파일 위치</h4>
-            <img class = 'predict_img' src = "static/{{im}}" alt ='No Image found'  width="280" height="250">
+            
+            
+            <h4 class="motto">예측 결과: {{ label }}</h4>
             <div class="subscribe">
                 <h5 class="info-text">
-                    표 위치 
+                    다시 업로드 하시려면 아래에서 파일을 선택하세요.
                 </h5>
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4 col-sm6-6 col-sm-offset-3 ">
-                        <form class="form-inline" role="form" action="http://localhost:5000/fileUpload">
+                        <form class="form-inline" role="form" action="/fileUpload" method="POST" enctype="multipart/form-data">
                           <div class="form-group">
-                            <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                            <input type="file" class="form-control transparent" placeholder="Your email here..." name="file">
+                            <label class="sr-only" for="exampleInputEmail2">파일 선택</label>
+                            <input type="file" class="form-control transparent" name="file" required>
                           </div>
                           <button type="submit" class="btn btn-danger btn-fill">제출하기</button>
                         </form>
+                        <h6>다른 가구의 설명을 보고싶으시면 <a href="https://www.uiuc.or.kr/front">여기</a>를 클릭 하세요</h6>
 
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <div class="footer">
       <div class="container">
