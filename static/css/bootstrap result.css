@@ -7,6 +7,12 @@
  */
 
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
+@font-face {
+  font-family: 'TTLaundryGothicB';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/TTLaundryGothicB.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
 
 article,
 aside,
@@ -21,6 +27,34 @@ nav,
 section,
 summary {
   display: block;
+}
+table {
+  margin: 0 auto;
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid white;
+  position: relative;
+  left: 100%;
+  transform: translateX(-50%);
+  max-width: 50%; /* 이미지가 화면을 넘지 않도록 설정 */
+  height: 200px;
+  font-size: 24px;
+  color:#000
+}
+ 
+tr:nth-child(even) {
+  background: rgb(0, 255, 255);
+}
+tr:nth-child(odd) {
+  background: rgb(0, 255, 0);
+} 
+th, td {
+  padding: 10px 30px;
+}
+ 
+th {
+  border-bottom: 1px solid white;
+  background: rgb(230, 230, 230);
 }
 
 audio,
@@ -40,7 +74,7 @@ template {
 }
 
 html {
-  font-family: sans-serif;
+  font-family: "TTLaundryGothicB";
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
@@ -95,7 +129,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, serif;
+  font-family: "TTLaundryGothicB";
   font-size: 1em;
 }
 
@@ -305,7 +339,7 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "TTLaundryGothicB", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
@@ -481,10 +515,10 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "TTLaundryGothicB", Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.1;
-  color: inherit;
+  color: white;
 }
 
 h1 small,
@@ -575,7 +609,7 @@ h5,
 
 h6,
 .h6 {
-  font-size: 12px;
+  font-size: 20px;
 }
 
 .page-header {
@@ -740,7 +774,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+  font-family: Monaco, Menlo, Consolas, "TTLaundryGothicB", monospace;
 }
 
 code {
